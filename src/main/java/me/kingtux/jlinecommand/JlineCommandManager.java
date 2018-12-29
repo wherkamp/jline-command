@@ -2,13 +2,19 @@ package me.kingtux.jlinecommand;
 
 import org.jline.reader.LineReader;
 import org.jline.reader.LineReaderBuilder;
+import org.jline.reader.UserInterruptException;
 import org.jline.terminal.Terminal;
 import org.jline.terminal.TerminalBuilder;
 
 import java.io.IOException;
 import java.util.*;
 
-public class JlineCommandManager {
+/**
+ * A manager for the command library.
+ *
+ * @author KingTux
+ */
+public class JlineCommandManager extends Thread {
     //appName
     //appName and Terminal
     //appName, key, and terminal
@@ -32,26 +38,19 @@ public class JlineCommandManager {
 
 
     public JlineCommandManager(String appName, String key, Terminal terminal) {
-
         reader = LineReaderBuilder.builder().appName(appName).terminal(terminal).completer(new SimpleCompleter(this)).build();
         this.key = key;
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> running = false));
-        Thread thread = new Thread(() -> {
-            while (running) {
-                reader.getTerminal().flush();
-                String s = reader.readLine(key + " ");
-                if (!s.isEmpty()) {
-                    runCommand(s);
-                }
-            }
-        });
-        thread.start();
+        Runtime.getRuntime().addShutdownHook(new Thread(this::close));
+    }
+
+
+    public void close() {
+        running = false;
     }
 
     private void runCommand(String s) {
         String[] run = s.split(" ");
         List<String> runList = new ArrayList<>(Arrays.asList(run));
-
         Map.Entry<JlineCommand, JlineCompleter> command = getCommand(runList.remove(0));
         command.getKey().execute(runList);
     }
@@ -93,5 +92,20 @@ public class JlineCommandManager {
             }
         }
         return null;
+    }
+
+    @Override
+    public void run() {
+        while (running) {
+            try {
+                reader.getTerminal().flush();
+                String s = reader.readLine(key + " ");
+                if (!s.isEmpty()) {
+                    runCommand(s);
+                }
+            } catch (UserInterruptException ignored) {
+
+            }
+        }
     }
 }

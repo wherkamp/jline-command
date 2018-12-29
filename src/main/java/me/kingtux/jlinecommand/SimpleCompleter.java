@@ -8,10 +8,10 @@ import org.jline.reader.ParsedLine;
 import java.util.List;
 import java.util.Map;
 
-public class SimpleCompleter implements Completer {
+class SimpleCompleter implements Completer {
     private JlineCommandManager jlineCommandManager;
 
-    public SimpleCompleter(JlineCommandManager jlineCommandManager) {
+    SimpleCompleter(JlineCommandManager jlineCommandManager) {
         this.jlineCommandManager = jlineCommandManager;
     }
 
@@ -21,7 +21,7 @@ public class SimpleCompleter implements Completer {
         assert parsedLine != null;
         if (parsedLine.wordIndex() == 0) {
             for (JlineCommand jlineCommand : jlineCommandManager.getCommands().keySet()) {
-                jlineCommand.commands().stream().forEach(s -> {
+                jlineCommand.commands().forEach(s -> {
                     list.add(new Candidate(s));
                 });
             }
