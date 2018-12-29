@@ -20,7 +20,7 @@ public class JlineCommandManager extends Thread {
     //appName, key, and terminal
     //appName, key
     private LineReader reader;
-    private String key = ">";
+    private String key;
     private boolean running = true;
     private Map<JlineCommand, JlineCompleter> commands = new HashMap<>();
 
@@ -41,9 +41,10 @@ public class JlineCommandManager extends Thread {
         reader = LineReaderBuilder.builder().appName(appName).terminal(terminal).completer(new SimpleCompleter(this)).build();
         this.key = key;
         Runtime.getRuntime().addShutdownHook(new Thread(this::close));
+        start();
     }
 
-
+    @SuppressWarnings("WeakerAccess")
     public void close() {
         running = false;
     }
@@ -72,10 +73,11 @@ public class JlineCommandManager extends Thread {
         commands.put(jlineCommand, jlineCompleter);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Map<JlineCommand, JlineCompleter> getCommands() {
         return commands;
     }
-
+    @SuppressWarnings("WeakerAccess")
     public Map.Entry<JlineCommand, JlineCompleter> getCommand(String word) {
         for (JlineCommand jlineCommand : commands.keySet()) {
             if (jlineCommand.commands().contains(word.toLowerCase())) {

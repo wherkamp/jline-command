@@ -12,7 +12,7 @@ This is a simple library for having commands inside your command line
       <groupId>me.kingtux</groupId>
       <artifactId>jline-command</artifactId>
       <!---Make sure you use Latest Version!-->
-      <version>1.0-SNAPSHOT/version>
+      <version>1.0/version>
       <scope>compile</scope>
     </dependency>
 ```
@@ -23,7 +23,7 @@ repositories {
 }
 
 dependencies {
-   compile "me.kingtux:jline-command:1.0-SNAPSHOT"
+   compile "me.kingtux:jline-command:1.0"
 }
 ```
 # How to use
