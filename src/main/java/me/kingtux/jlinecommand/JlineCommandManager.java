@@ -53,6 +53,7 @@ public class JlineCommandManager extends Thread {
         String[] run = s.split(" ");
         List<String> runList = new ArrayList<>(Arrays.asList(run));
         Map.Entry<JlineCommand, JlineCompleter> command = getCommand(runList.remove(0));
+        if (command == null) return;
         command.getKey().execute(runList);
     }
 
