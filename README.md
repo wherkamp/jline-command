@@ -1,4 +1,6 @@
-# Jline-Command
+# Jline-Command 
+[![Build Status](https://ci.kingtux.me/job/Jline-Command/badge/icon)](https://ci.kingtux.me/job/Jline-Command/)
+
 This is a simple library for having commands inside your command line
 
 ## Maven
