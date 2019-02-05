@@ -7,7 +7,7 @@ This is a simple library for having commands inside your command line
 ```xml
    <repository>
       <id>kingtux-repo</id>
-      <url>http://repo.kingtux.me/repository/maven-public/</url>
+      <url>https://repo.kingtux.me/repository/maven-public/</url>
     </repository>
     
     <dependency>

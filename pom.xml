@@ -6,15 +6,15 @@
 
     <groupId>me.kingtux</groupId>
     <artifactId>jline-command</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <distributionManagement>
         <repository>
             <id>kingtux-repo</id>
-            <url>http://repo.kingtux.me/repository/maven-releases/</url>
+            <url>https://repo.kingtux.me/repository/maven-releases/</url>
         </repository>
         <snapshotRepository>
             <id>kingtux-repo</id>
-            <url>http://repo.kingtux.me/repository/maven-snapshots/</url>
+            <url>https://repo.kingtux.me/repository/maven-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 
@@ -64,7 +64,7 @@
                 </executions>
                 <configuration>
                     <serverId>kingtux-repo</serverId>
-                    <nexusUrl>http://repo.kingtux.me/repository/maven-releases/</nexusUrl>
+                    <nexusUrl>https://repo.kingtux.me/repository/maven-releases/</nexusUrl>
                     <skipStaging>true</skipStaging>
                 </configuration>
             </plugin>
